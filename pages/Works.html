@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品展示</title>
+    <style>
+        .work-showcase {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-right: 1px solid #ccc;
+        }
+
+        .category {
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .icon-expand {
+            float: right;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-expand.open {
+            transform: rotate(90deg);
+        }
+
+        .works-list {
+            margin-top: 10px;
+        }
+
+        .work-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc;
+            margin-left: 40px;
+        }
+
+        .work-item.selected {
+            background-color: #42b983;
+            color: white;
+        }
+
+        .work-detail {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .work-showcase {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .work-detail {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="work-showcase">
+        <div class="sidebar">
+            <div class="category" @click="toggleCategory('python')"
+                :class="{ 'expanded': selectedCategory === 'python' }">
+                Python <i class="icon-expand" :class="{ 'open': isCategoryExpanded('python') }">&#9660;</i>
+            </div>
+            <div v-show="isCategoryExpanded('python')" class="works-list">
+                <div class="work-item" :class="{ 'selected': selectedWorkId === work.id }" @click="selectWork(work.id)"
+                    v-for="work in pythonWorks" :key="work.id">
+                    {{ work.name }}
+                </div>
+            </div>
+
+            <div class="category" @click="toggleCategory('frontend')"
+                :class="{ 'expanded': selectedCategory === 'frontend' }">
+                前端 <i class="icon-expand" :class="{ 'open': isCategoryExpanded('frontend') }">&#9660;</i>
+            </div>
+            <div v-show="isCategoryExpanded('frontend')" class="works-list">
+                <div class="work-item" :class="{ 'selected': selectedWorkId === work.id }" @click="selectWork(work.id)"
+                    v-for="work in frontendWorks" :key="work.id">
+                    {{ work.name }}
+                </div>
+            </div>
+        </div>
+        <div class="work-detail" v-if="selectedWork">
+            <h2>{{ selectedWork.name }}</h2>
+            <p>{{ selectedWork.description }}</p>
+            <img :src="selectedWork.imgurl" :alt="selectedWork.name" style="width: 100%; height: auto;">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+
+    <script type="text/javascript" src="../js/Works.js"></script>
+</body>
+
+</html>
