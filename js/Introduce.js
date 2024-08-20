@@ -17,8 +17,9 @@ function setActiveSection(defaultSection) {
 }
 
 // 计算年龄
-const age = new Date().getFullYear() - 2005;
-document.querySelector('p strong + span').textContent = age;
+var currentYear = new Date().getFullYear();
+var age = currentYear - 2005;
+document.getElementById('age').textContent = age;
 
 // 默认显示个人资料部分
 setActiveSection('profile');
