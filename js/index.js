@@ -34,7 +34,7 @@ function register() {
     } else if (password === password_true) {
         console.log('访客名:', visitorName);
         console.log('密码:', password);
-        window.location.href = './pages/Home.html';
+        window.location.href = 'https://zjsnulixuexi.github.io/zjsnuluxuexi.github.io/pages/Home.html';
     } else {
         alert('牢底，不知道密码看什么看');
     }
